@@ -1,4 +1,4 @@
-package com.revature.web.extras;
+package com.revature.web;
 
 import java.io.IOException;
 import java.rmi.ServerException;
@@ -18,7 +18,8 @@ public class Cookies extends HttpServlet {
 	String password= request.getParameter("password");	
 	
 	
-	if (username.equals("Andrey") && password.equals("password")) {
+	
+	if (username.equals("karina") && password.equals("114164")) {
 		
 		Cookie myCookie =new Cookie("authenticated", "true");
 		response.addCookie(myCookie);

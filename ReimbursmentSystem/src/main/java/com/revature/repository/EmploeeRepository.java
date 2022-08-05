@@ -2,24 +2,25 @@ package com.revature.repository;
 import java.util.List;
 
 import com.revature.model.Employee;
+import com.revature.model.Login;
 
 public interface EmploeeRepository {
 	
-	/*
-	 * What types of methods
-	 */
+	
 	List <Employee>  findAllEmployee();
-	//Save new record
+	
 	
 	void save (Employee employee );
-	// updates 
+	
 	void update(Employee employee);
-	/**
-	 *  
-	 * @param id
-	 * @return
-	 */
+	
 	Employee findById(int id);
+	
+
+	 Employee findByUserName(String username) ;
+	}
+
+	
 
 
-}
+

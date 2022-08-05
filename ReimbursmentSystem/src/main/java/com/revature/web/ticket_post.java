@@ -12,6 +12,8 @@ import com.revature.model.Employee;
 import com.revature.model.Ticket;
 import com.revature.repository.EmploeeRepository;
 import com.revature.repository.EmployeeRepositoryImpl;
+import com.revature.repository.TicketRepository;
+import com.revature.repository.TicketRepositoryImpl;
 
 /**
  * Servlet implementation class ticket_post
@@ -35,7 +37,7 @@ public class ticket_post extends HttpServlet {
 		ObjectMapper objectMapper=new ObjectMapper();
 		Ticket ticketClient=objectMapper.readValue(requestBodytext, Ticket.class);
 		
-		Ticket_rep ticketSub =new Ticket_rep();
+		TicketRepository ticketSub= new TicketRepositoryImpl();
 		ticketSub.save(ticketClient);
 	}
 

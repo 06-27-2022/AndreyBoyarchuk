@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.Ticket_rep;
 import com.revature.model.Ticket;
+import com.revature.repository.TicketRepository;
+import com.revature.repository.TicketRepositoryImpl;
 
 /**
  * Servlet implementation class NullStatusTickets
@@ -32,7 +34,7 @@ public class NullStatusTickets extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		Ticket_rep all_ticks= new Ticket_rep();
+		TicketRepository all_ticks= new TicketRepositoryImpl();
 		List <Ticket> tickets=all_ticks.selectNullStatusTicket();
 		
 		ObjectMapper imThemap =new ObjectMapper();

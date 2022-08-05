@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.model.Employee;
+import com.revature.model.Login;
 import com.revature.util.ConnectionUtil;
 
 public class EmployeeRepositoryImpl implements EmploeeRepository {
@@ -207,6 +208,65 @@ public class EmployeeRepositoryImpl implements EmploeeRepository {
 		}
 		return employee;
 	}
+	
+	public Employee findByUserName(String username) {
+		Employee employee=null;
+		Connection conn=null;
+		PreparedStatement stmt = null;
+		ResultSet set=null;
+		final String SQL="select* from employee where username =?";
+		
+		try {
+		
+			conn = ConnectionUtil.getNewConnection();
+			stmt = conn.prepareStatement(SQL);
+			stmt.setString(1,username);
+			set=stmt.executeQuery();
+			if(set.next()) {
+				employee= new Employee(
+						set.getInt(1),
+						set.getString(2),
+						set.getString(3),
+						set.getInt(4),
+						set.getString(5),
+						set.getString(6),
+						set.getString(7)
+						);
+			}
+				
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return employee;
+	}
+	
+
+	
+	/*
+	public static boolean login(String username, String password) {
+		
+		Employee employee = null;
+		
+		employee = EmploeeRepository.findByUserName(username);
+		
+		if ((employee != null) && password.equals(employee.getPassword())) {
+			return true;
+		}
+		
+		return false;
+	}
+*/
+	
+	
+	
 	
 	
 

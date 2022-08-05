@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,54 +34,26 @@ public class LoginSession extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String param0=request.getParameter("empl_id");
-		int param=Integer.parseInt(param0);
 		
 		
+		EmploeeRepository em_rp =new EmployeeRepositoryImpl();
+
+		String username = request.getParameter("username");	
+		String password= request.getParameter("password");	
 		
-		EmploeeRepository employee = new EmployeeRepositoryImpl();
-
-		Employee retriveEmployee = employee.findById(param);
-
-		String usernameP = retriveEmployee.getUsername();
-
-		String passwordP = retriveEmployee.getPassword();
-
-		int departmentP = retriveEmployee.getDepartment();
+		Employee emp_values=em_rp.findByUserName(username);
 		
+		 String par_user=emp_values.getUsername();
+		 String par_password=emp_values.getPassword();
 		
-		response.setContentType("text/html");
-		response.addHeader("Cusomt Header", "My Header");
-			PrintWriter writer=response.getWriter();
-			writer.write(departmentP);
-			writer.write(usernameP+" "+passwordP);
-/*
-		if (username.equals(usernameP) && password.equals(passwordP)) {
-
-			HttpSession session = request.getSession();
-			Pseudo cod 
-				if department id = 1
-			   		employee post
-			   		all tickets
-			   		all employees
-			   	
-
-		} else {
-			response.setStatus(400);
+		if (username.equals(par_user) && password.equals(par_password)) {
+			
+			Cookie myCookie =new Cookie("authenticated", "true");
+			response.addCookie(myCookie);
 		}
-*/
+		else {
+			response.setStatus(401);
+		}
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
-}

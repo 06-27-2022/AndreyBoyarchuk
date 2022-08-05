@@ -37,6 +37,8 @@ public Ticket(int id, String description, String status, String date_approved, S
 }
 
 
+
+
 @Override
 public int hashCode() {
 	return Objects.hash(amount, date_approved, date_created, description, employee_id, id, status, type);

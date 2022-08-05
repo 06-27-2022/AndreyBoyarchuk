@@ -1,4 +1,4 @@
-package com.revature.web.extras;
+package com.revature.web;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

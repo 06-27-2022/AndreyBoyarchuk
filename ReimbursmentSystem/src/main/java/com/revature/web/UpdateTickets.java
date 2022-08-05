@@ -9,7 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.revature.Ticket_rep;
+import com.revature.model.Employee;
 import com.revature.model.Ticket;
+import com.revature.repository.EmploeeRepository;
+import com.revature.repository.EmployeeRepositoryImpl;
+import com.revature.repository.TicketRepository;
+import com.revature.repository.TicketRepositoryImpl;
 
 /**
  * Servlet implementation class UpdateTickets
@@ -31,29 +36,43 @@ public class UpdateTickets extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Ticket_rep view_tick = new Ticket_rep();
-		// Initiate class
+		
+		  //Ticket tick_upate = new Ticket(1, "", "","","", 1,55.00,",");
+		
+				
+/*
+		EmploeeRepository employeeRepository = new EmployeeRepositoryImpl();
+
+		employeeRepository.update(employeeToUpdate);
+		 */
+		
+		
+		
+		
+	
 		String st_Ticket_id = request.getParameter("id");
 		int ticket_id = Integer.parseInt(st_Ticket_id);
-		String status = request.getParameter("status");
-		Ticket retr_ticket = view_tick.findById(ticket_id);
-		String description = retr_ticket.getDescription();
-		String date_approved = retr_ticket.getDate_approved();
-		String date_created = retr_ticket.getDate_created();
-		int employee_id = retr_ticket.getEmployee_id();
-		double amount = retr_ticket.getAmount();
-		String type = retr_ticket.getType();
+		//String par_status=request.getParameter("status");
 		
-		Ticket ticket_to_update= new Ticket(ticket_id,description, status, date_approved ,date_created, employee_id,amount, type);
-		view_tick.update(ticket_to_update);
+		//int par_id =1;
+		
+		String par_status ="approved";
+		
+		TicketRepository tick_rep= new TicketRepositoryImpl();
+		Ticket tick_upate = new Ticket(ticket_id,"some",par_status,"some","some", 1, 5.0,"some");
+		
+		tick_rep.update(tick_upate);
+		
 		/*
-		Ticket ticket_by_status=view_tick.findById(ticket_id);
+		Ticket view_sts=tick_rep.findById(ticket_id);
+		
+		
 		
 		response.setContentType("text/html");
-		response.addHeader("Cusomt Header", "My Header");
+		response.addHeader("Custom Header", "My Header");
 			PrintWriter writer=response.getWriter();
 			writer.write(ticket_id);
-			writer.write(ticket_by_status.getStatus());
+			writer.write(view_sts.getStatus());
    */
 	}
 
